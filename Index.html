@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PixelCraft - Your Friendly Minecraft Server</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4CAF50;
+      --primary-dark: #388E3C;
+      --secondary: #FF9800;
+      --dark: #121212;
+      --darker: #0a0a0a;
+      --medium: #1c1c1c;
+      --light: #f5f5f5;
+      --accent: #8BC34A;
+      --success: #4caf50;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--darker);
+      color: var(--light);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(25, 25, 35, 0.1) 0%, rgba(10, 10, 20, 0.1) 90%),
+        radial-gradient(circle at 90% 80%, rgba(30, 30, 50, 0.1) 0%, rgba(15, 15, 25, 0.1) 90%);
+      background-attachment: fixed;
+    }
+    
+    /* Header & Navigation */
+    header {
+      background: rgba(28, 28, 28, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--primary);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    
+    .logo i {
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+    
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+      background: rgba(76, 175, 80, 0.1);
+    }
+    
+    nav a i {
+      font-size: 1.1rem;
+    }
+    
+    .nav-btn {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+      background: linear-gradient(45deg, var(--primary-dark), #689F38);
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 6rem 1rem 8rem;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(rgba(10, 10, 20, 0.85), rgba(18, 18, 35, 0.9)), 
+                  url('https://images.unsplash.com/photo-1587573089734-599851b0c8b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+      animation: fadeInDown 1s ease;
+    }
+    
+    .hero h1 span {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+    
+    .hero p {
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      color: #e0e0e0;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+    
+    .ip-container {
+      background: rgba(34, 34, 34, 0.7);
+      padding: 1.2rem 2rem;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 15px;
+      font-size: 1.4rem;
+      margin: 1rem auto;
+      color: var(--primary);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+    
+    .ip-container strong {
+      margin-left: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    
+    .ip-container .copy-btn {
+      margin-left: 15px;
+      background: rgba(76, 175, 80, 0.2);
+      color: var(--primary);
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .ip-container .copy-btn:hover {
+      background: rgba(76, 175, 80, 0.4);
+    }
+    
+    .version {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      color: #bbb;
+      animation: fadeInUp 1s ease 0.6s both;
+    }
+    
+    .hero-btns {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      animation: fadeInUp 1s ease 0.8s both;
+    }
+    
+    /* Server Stats */
+    .server-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      max-width: 1000px;
+      margin: -3rem auto 5rem;
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
+    
+    .stat-card {
+      background: rgba(28, 28, 28, 0.9);
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      min-width: 200px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+    }
+    
+    .stat-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .stat-card .number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .stat-card .label {
+      color: #bbb;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Main Content Sections */
+    section {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+    
+    .section-header h2:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+    
+    .section-header p {
+      max-width: 700px;
+      margin: 1.5rem auto 0;
+      color: #bbb;
+      font-size: 1.1rem;
+    }
+    
+    .rules-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .rule-card {
+      background: rgba(28, 28, 28, 0.7);
+      border-radius: 15px;
+      padding: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+    
+    .rule-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border-color: rgba(76, 175, 80, 0.3);
+    }
+    
+    .rule-card h3 {
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
+    }
+    
+    .rule-card h3 i {
+      font-size: 1.8rem;
+    }
+    
+    .rule-card ul {
+      padding-left: 1.2rem;
+    }
+    
+    .rule-card li {
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .rule-card li:before {
+      content: '•';
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+    }
+    
+    /* Plugin Sections */
+    .plugin-section {
+      background: rgba(28, 28, 28, 0.7);
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-left: 4px solid var(--primary);
+      backdrop-filter: blur(10px);
+    }
+    
+    .plugin-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .plugin-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-right: 1rem;
+    }
+    
+    .plugin-title {
+      font-size: 1.8rem;
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .plugin-description {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    
+    .plugin-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .command-list {
+      margin-top: 1.5rem;
+    }
+    
+    .command-item {
+      display: flex;
+      margin-bottom: 1rem;
+      align-items: flex-start;
+    }
+    
+    .command-icon {
+      font-size: 1.2rem;
+      margin-right: 1rem;
+      color: var(--primary);
+      margin-top: 3px;
+    }
+    
+    .command-text {
+      flex: 1;
+    }
+    
+    .command-name {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .command-desc {
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+    
+    /* How to Join */
+    .steps-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+    
+    .step-card {
+      background: rgba(28, 28, 28, 0.7);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      max-width: 250px;
+      position: relative;
+      transition: transform 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .step-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(76, 175, 80, 0.3);
+    }
+    
+    .step-number {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: white;
+    }
+    
+    .step-card i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+    
+    .step-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    .step-card p {
+      color: #bbb;
+    }
+    
+    /* Buttons */
+    .btn {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5);
+      background: linear-gradient(45deg, var(--primary-dark), #689F38);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background: rgba(76, 175, 80, 0.1);
+      color: white;
+    }
+    
+    /* Footer */
+    footer {
+      background: rgba(15, 15, 20, 0.95);
+      padding: 4rem 1rem 2rem;
+      margin-top: 5rem;
+      position: relative;
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(76, 175, 80, 0.2);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+    }
+    
+    .footer-column h3 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .footer-column h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+    }
+    
+    .footer-column p {
+      color: #bbb;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--light);
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column ul li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-column ul li a {
+      color: #bbb;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .footer-column ul li a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+    
+    .footer-column ul li a i {
+      color: var(--primary);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #888;
+      font-size: 0.9rem;
+    }
+    
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+      }
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+      }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      
+      .server-stats {
+        gap: 1.5rem;
+      }
+      
+      .stat-card {
+        min-width: 180px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      nav {
+        position: fixed;
+        top: 70px;
+        right: -300px;
+        width: 280px;
+        height: calc(100vh - 70px);
+        background: rgba(28, 28, 28, 0.95);
+        flex-direction: column;
+        padding: 2rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+        backdrop-filter: blur(10px);
+        border-left: 2px solid var(--primary);
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .ip-container {
+        font-size: 1.2rem;
+        padding: 1rem;
+      }
+      
+      .server-stats {
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+        gap: 1rem;
+      }
+      
+      .stat-card {
+        min-width: 140px;
+        padding: 1rem;
+      }
+      
+      .stat-card .number {
+        font-size: 1.8rem;
+      }
+      
+      .hero-btns {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero {
+        padding: 4rem 1rem 6rem;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .ip-container {
+        font-size: 1rem;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .stat-card {
+        min-width: 100%;
+      }
+      
+      .section-header h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <i class="fas fa-cubes"></i>
+      <h1>PixelCraft</h1>
+    </div>
+    
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav id="mainNav">
+      <a href="#home"><i class="fas fa-home"></i> Home</a>
+      <a href="#rules"><i class="fas fa-gavel"></i> Rules</a>
+      <a href="#plugins"><i class="fas fa-puzzle-piece"></i> Plugins</a>
+      <a href="#how-to-join"><i class="fas fa-gamepad"></i> How to Play</a>
+      <a href="https://discord.gg/yourdiscord" target="_blank" class="nav-btn"><i class="fab fa-discord"></i> Discord</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Welcome to <span>PixelCraft</span></h1>
+      <p>Your safe, fun, and friendly Minecraft escape with exciting plugins and features!</p>
+      
+      <div class="ip-container">
+        <i class="fas fa-server"></i> 
+        IP: <strong>publiclifesteal.falixsrv.me</strong>
+        <button class="copy-btn" onclick="copyIP()"><i class="fas fa-copy"></i></button>
+      </div>
+      
+      <div class="version">
+        <i class="fas fa-code-branch"></i> Supported Version: <strong>1.21.4</strong>
+      </div>
+      
+      <div class="hero-btns">
+        <a href="#how-to-join" class="btn"><i class="fas fa-play-circle"></i> Join Now</a>
+        <a href="https://discord.gg/yourdiscord" target="_blank" class="btn btn-outline"><i class="fab fa-discord"></i> Join Discord</a>
+      </div>
+    </div>
+  </section>
+  
+  <div class="server-stats">
+    <div class="stat-card">
+      <i class="fas fa-users"></i>
+      <div class="number">500+</div>
+      <div class="label">Active Players</div>
+    </div>
+    
+    <div class="stat-card">
+      <i class="fas fa-calendar-alt"></i>
+      <div class="number">24/7</div>
+      <div class="label">Uptime</div>
+    </div>
+    
+    <div class="stat-card">
+      <i class="fas fa-map"></i>
+      <div class="number">8</div>
+      <div class="label">Unique Worlds</div>
+    </div>
+    
+    <div class="stat-card">
+      <i class="fas fa-trophy"></i>
+      <div class="number">50+</div>
+      <div class="label">Daily Events</div>
+    </div>
+  </div>
+
+  <section id="rules">
+    <div class="section-header">
+      <h2>Server Rules</h2>
+      <p>To ensure everyone has a great experience, please follow our community guidelines</p>
+    </div>
+    
+    <div class="rules-container">
+      <div class="rule-card">
+        <h3><i class="fas fa-handshake"></i> General Rules</h3>
+        <ul>
+          <li>Be Respectful – No hate speech, bullying, racism, sexism, or discrimination of any kind.</li>
+          <li>No Cheating or Hacking – No X-ray, fly hacks, autoclickers, or any unfair advantage.</li>
+          <li>Keep Chat Clean – No spamming, advertising, or inappropriate content.</li>
+          <li>No NSFW or Inappropriate Builds – PixelCraft is family-friendly.</li>
+          <li>Follow Staff Instructions – Our staff are here to help, their decisions are final.</li>
+        </ul>
+      </div>
+      
+      <div class="rule-card">
+        <h3><i class="fas fa-gamepad"></i> Gameplay Rules</h3>
+        <ul>
+          <li><strong>PVP Rules:</strong> Only outside claims, unless in PvP zones or arena (combat logging is bannable – report with proof).</li>
+          <li>Don't Exploit Bugs – Report bugs/glitches, don't abuse them.</li>
+          <li>No Lag Machines or AFK Farms – Anything that lags the server <strong>will</strong> be removed.</li>
+        </ul>
+      </div>
+      
+      <div class="rule-card">
+        <h3><i class="fas fa-exclamation-triangle"></i> Additional Notes</h3>
+        <ul>
+          <li><strong>Mods & Resource Packs</strong> – Only cosmetic or performance-enhancing mods allowed (OptiFine, etc.). Ask staff if unsure.</li>
+          <li><strong>Consequences</strong> – Breaking rules may result in a warning, mute, kick, temporary ban, or permanent ban depending on the severity.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <section id="plugins">
+    <div class="section-header">
+      <h2>Server Plugins</h2>
+      <p>Enhance your gameplay with our powerful server plugins</p>
+    </div>
+    
+    <!-- Grief Prevention Plugin -->
+    <div class="plugin-section">
+      <div class="plugin-header">
+        <div class="plugin-icon">🗡️</div>
+        <h3 class="plugin-title">Grief Prevention</h3>
+      </div>
+      
+      <p class="plugin-description">
+        Grief Prevention is a plugin to ensure that player builds remain safe from unwanted interference. 
+        We strongly recommend claiming your base to prevent any disruptions. You can obtain a claim shovel 
+        by using the command <strong>/kit claim</strong>.
+      </p>
+      
+      <div class="plugin-links">
+        <a href="https://legacy.griefprevention.com/commands/" target="_blank" class="btn"><i class="fas fa-book"></i> Prevention Guide</a>
+        <a href="https://www.youtube.com/watch?v=f9OhYrxEPws" target="_blank" class="btn btn-outline"><i class="fab fa-youtube"></i> Video Tutorial</a>
+      </div>
+      
+      <div class="command-list">
+        <h4>Essential Commands:</h4>
+        
+        <div class="command-item">
+          <div class="command-icon">🗑️</div>
+          <div class="command-text">
+            <div class="command-name">/abandonclaim or /unclaim</div>
+            <div class="command-desc">Removes the claim you are currently standing in.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">🗑️</div>
+          <div class="command-text">
+            <div class="command-name">/abandonallclaims</div>
+            <div class="command-desc">Deletes all of your existing claims.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">🤝</div>
+          <div class="command-text">
+            <div class="command-name">/trust &lt;PlayerName&gt;</div>
+            <div class="command-desc">Grants another player permission to build and interact within your claim.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">📦</div>
+          <div class="command-text">
+            <div class="command-name">/containertrust &lt;PlayerName&gt;</div>
+            <div class="command-desc">Gives a player permission to use your buttons, levers, beds, crafting gear, containers, and animals.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">🔐</div>
+          <div class="command-text">
+            <div class="command-name">/accesstrust &lt;PlayerName&gt;</div>
+            <div class="command-desc">Gives a player permission to use your buttons, levers, and beds.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">🔐</div>
+          <div class="command-text">
+            <div class="command-name">/permissiontrust &lt;PlayerName&gt;</div>
+            <div class="command-desc">Grants a player permission to share his permission level with others.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">⛔️</div>
+          <div class="command-text">
+            <div class="command-name">/untrust &lt;PlayerName&gt;</div>
+            <div class="command-desc">Revokes a player's access to your claim.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">📄</div>
+          <div class="command-text">
+            <div class="command-name">/trustlist</div>
+            <div class="command-desc">Lists the permissions for the claim you're standing in.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">📁</div>
+          <div class="command-text">
+            <div class="command-name">/claimslist</div>
+            <div class="command-desc">Lists your claims and claim block details.</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="note" style="margin-top: 1.5rem; color: #ff9800; font-style: italic;">
+        <strong>❗️Important:</strong> If you are inactive for 2 months consecutively, all your claims will be deleted.
+      </div>
+    </div>
+    
+    <!-- AuraSkills Plugin -->
+    <div class="plugin-section">
+      <div class="plugin-header">
+        <div class="plugin-icon">💪</div>
+        <h3 class="plugin-title">AuraSkills</h3>
+      </div>
+      
+      <p class="plugin-description">
+        We offer the AuraSkills plugin to enhance your Minecraft experience! This exciting RPG-style skill system 
+        allows you to earn experience in 11 unique skills like Mining, Fighting, and Enchanting. Unlock powerful 
+        abilities, boost your stats, and earn amazing rewards as you level up. The more you play, the stronger you become!
+      </p>
+      
+      <div class="plugin-links">
+        <a href="https://wiki.aurelium.dev/auraskills" target="_blank" class="btn"><i class="fas fa-book"></i> Skills Guide</a>
+        <a href="https://youtu.be/UVrUYHuecw4" target="_blank" class="btn btn-outline"><i class="fab fa-youtube"></i> Video Tutorial</a>
+      </div>
+      
+      <div class="command-list">
+        <h4>Essential Commands:</h4>
+        
+        <div class="command-item">
+          <div class="command-icon">📖</div>
+          <div class="command-text">
+            <div class="command-name">/skills</div>
+            <div class="command-desc">View your skill level. A GUI will appear showing all 11 skills, along with a guide and your current stats for each skill.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">📊</div>
+          <div class="command-text">
+            <div class="command-name">/skills rank</div>
+            <div class="command-desc">View your rank in each skill compared to other players.</div>
+          </div>
+        </div>
+        
+        <div class="command-item">
+          <div class="command-icon">🏆</div>
+          <div class="command-text">
+            <div class="command-name">/skills top</div>
+            <div class="command-desc">View your overall skill rankings compared to all players on the server.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="how-to-join">
+    <div class="section-header">
+      <h2>How to Join</h2>
+      <p>Follow these simple steps to start your adventure in PixelCraft</p>
+    </div>
+    
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <i class="fas fa-desktop"></i>
+        <h3>Open Minecraft</h3>
+        <p>Launch the Minecraft launcher and log in with your account</p>
+      </div>
+      
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <i class="fas fa-code-branch"></i>
+        <h3>Select Version</h3>
+        <p>Create a new installation using version <strong>1.21.4</strong></p>
+      </div>
+      
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <i class="fas fa-network-wired"></i>
+        <h3>Add Server</h3>
+        <p>Go to Multiplayer > Add Server > Enter our IP address</p>
+      </div>
+      
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <i class="fas fa-play"></i>
+        <h3>Join Server</h3>
+        <p>Select PixelCraft from your server list and click "Join Server"</p>
+      </div>
+    </div>
+    
+    <div class="section-header" style="margin-top: 4rem;">
+      <h3>Troubleshooting</h3>
+    </div>
+    
+    <div class="rules-container">
+      <div class="rule-card">
+        <ul>
+          <li>Ensure you're on version <strong>1.21.4</strong></li>
+          <li>Double-check IP: <strong>publiclifesteal.falixsrv.me</strong></li>
+          <li>Check your internet connection or firewall settings</li>
+          <li>Still stuck? Contact us on <a href="https://discord.gg/yourdiscord" target="_blank" class="btn" style="margin-top: 1rem;"><i class="fab fa-discord"></i> Discord</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>About PixelCraft</h3>
+        <p>PixelCraft is a premium Minecraft server established in 2023, dedicated to providing a fun, safe, and engaging environment for players of all ages.</p>
+        <div class="social-links">
+          <a href="https://discord.gg/yourdiscord" target="_blank"><i class="fab fa-discord"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#rules"><i class="fas fa-chevron-right"></i> Server Rules</a></li>
+          <li><a href="#plugins"><i class="fas fa-chevron-right"></i> Plugins</a></li>
+          <li><a href="#how-to-join"><i class="fas fa-chevron-right"></i> How to Join</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Server Info</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-server"></i> IP: publiclifesteal.falixsrv.me</a></li>
+          <li><a href="#"><i class="fas fa-code-branch"></i> Version: 1.21.4</a></li>
+          <li><a href="#"><i class="fas fa-puzzle-piece"></i> Plugins: GriefPrevention, AuraSkills</a></li>
+          <li><a href="https://discord.gg/yourdiscord" target="_blank"><i class="fab fa-discord"></i> Join Discord</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      &copy; 2025 PixelCraft Minecraft Server. Not affiliated with Mojang or Microsoft.
+    </div>
+  </footer>
+  
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mainNav.classList.toggle('active');
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Close mobile menu if open
+          if (mainNav.classList.contains('active')) {
+            mainNav.classList.remove('active');
+          }
+        }
+      });
+    });
+    
+    // Copy IP to clipboard
+    function copyIP() {
+      const ip = 'publiclifesteal.falixsrv.me';
+      navigator.clipboard.writeText(ip);
+      
+      const btn = document.querySelector('.copy-btn');
+      btn.innerHTML = '<i class="fas fa-check"></i>';
+      btn.style.background = 'var(--success)';
+      
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fas fa-copy"></i>';
+        btn.style.background = '';
+      }, 2000);
+    }
+    
+    // Animate stats on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const statCards = document.querySelectorAll('.stat-card');
+          statCards.forEach((card, index) => {
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, index * 200);
+          });
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    observer.observe(document.querySelector('.server-stats'));
+  </script>
+</body>
+          </html>
